@@ -19,6 +19,7 @@ module PNC
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Flash
     config.middleware.use Rack::MethodOverride
+    config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/, /file:\/\/*/, 'file://', nil]
     config.middleware.use ActionDispatch::Session::CookieStore, {:key=>"_untitled1_session"}
     config.middleware.insert_before 0, Rack::Cors do
       allow do
