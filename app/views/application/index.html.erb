@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PNC</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+<div class="content-div">
+  <div class="signs">
+    <h1>Авторизация</h1>
+    <%= form_tag 'v1/user/login', id:"login-form", remote: true do %>
+      <%= label_tag :login, "Логин" %>
+      <%= text_field_tag :login, nil, placeholder: "Логин" %>
+      <%= label_tag :password, "Пароль" %>
+      <%= password_field_tag :password, nil, placeholder: "Пароль" %>
+      <div class="form-footer">
+        <%= submit_tag "Авторизация" %>
+        <%= link_to "Регистрация", 'v1/user/register', method: :get %>
+      </div>
+    <% end %>
+  </div>
+</div>
+</body>
+<%= javascript_pack_tag 'forms' %>
+<script>
+    window.addEventListener("load", (event) => {
+        if (localStorage.getItem("Authorization")) {
+            fetch("/v1/user/me", {
+                method: 'GET',
+                headers:
+                    {
+                        "Content-Type": "application/json",
+                        "Authorization": localStorage.getItem("Authorization")
+                    }
+            }).then(response => {
+                if (response.status != 200) {
+                    throw new Error();
+                }
+                return response.json();
+
+            }).then(json => {
+                localStorage.setItem("user_id", json["id"]);
+                window.open("/v1/message/");
+            }).catch(e => {
+                localStorage.removeItem("user_id");
+                localStorage.removeItem("Authorization");
+            });
+        }
+
+    });
+</script>
+</html>

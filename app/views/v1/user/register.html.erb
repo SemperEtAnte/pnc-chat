@@ -1,0 +1,23 @@
+<html>
+<head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+</head>
+<body>
+<div class="content-div">
+  <div class="signs">
+    <h1>Регистрация</h1>
+    <%= form_tag "register", id: 'register-form', remote: true do %>
+      <%= label_tag :login, "Логин"%>
+      <%= text_field_tag :login, nil, placeholder: "Логин", required: true %>
+      <%= label_tag :password, "Пароль" %>
+      <%= password_field_tag :password, nil, placeholder: "Пароль", required: true %>
+      <div class="form-footer">
+        <%= submit_tag "Регистрация" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= javascript_pack_tag 'forms' %>
+</body>
+</html>

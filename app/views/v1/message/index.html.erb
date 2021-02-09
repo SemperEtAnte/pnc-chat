@@ -1,0 +1,22 @@
+<html>
+<head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+<div class="content-div">
+  <button id="logout" onclick="logout()"><%=fa_icon "sign-out" %></button>
+  <div class="messages">
+    <div id="messages-body">
+
+    </div>
+    <div id="input-div">
+      <textarea id='message_text' placeholder="Введите сообщение" ></textarea>
+      <button id="send_message">Отправить</button>
+    </div>
+  </div>
+</div>
+</body>
+
+<%= javascript_pack_tag 'mainJS' %>
+
+</html>
