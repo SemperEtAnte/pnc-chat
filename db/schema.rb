@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2021_02_01_204207) do
   create_table "black_list_tokens", force: :cascade do |t|
     t.string "token"
     t.datetime "expires"
+    t.index ["token"], name: "index_black_list_tokens_on_token", unique: true
   end
 
   create_table "messages", force: :cascade do |t|
@@ -31,10 +32,9 @@ ActiveRecord::Schema.define(version: 2021_02_01_204207) do
   create_table "users", force: :cascade do |t|
     t.string "login"
     t.string "password_digest"
-    t.datetime "last_view"
-    t.string "avatar"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["login"], name: "index_users_on_login", unique: true
   end
 
 end
